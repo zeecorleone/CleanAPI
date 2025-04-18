@@ -1,4 +1,6 @@
-﻿using CleanAPI.Infrastructure.Data;
+﻿using CleanAPI.Core.Interfaces;
+using CleanAPI.Infrastructure.Data;
+using CleanAPI.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +14,9 @@ public static class DependencyInjection
         {
             options.UseSqlServer("Server=localhost;Database=Test_CleanAPI;Trusted_Connection=True;TrustServerCertificate=true;MultipleActiveResultSets=true");
         });
+
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
         return services;
     }
 }
