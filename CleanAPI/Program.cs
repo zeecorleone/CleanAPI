@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDI();
+builder.Services.AddDI(builder.Configuration);
 
 var app = builder.Build();
 
