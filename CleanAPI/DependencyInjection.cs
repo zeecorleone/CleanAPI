@@ -9,7 +9,7 @@ public static class DependencyInjection
     public static IServiceCollection AddDI(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddApplicationDI()
-            .AddInfrastructureDI(configuration)
+            .AddInfrastructureDI()
             .AddCoreDI(configuration);
 
         return services;

@@ -2,6 +2,7 @@
 using CleanAPI.Core.Options;
 using CleanAPI.Infrastructure.Data;
 using CleanAPI.Infrastructure.Repositories;
+using CleanAPI.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +12,7 @@ namespace CleanAPI.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructureDI(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureDI(this IServiceCollection services)
     {
         //services.AddDbContext<AppDbContext>(options =>
         //{
@@ -24,6 +25,13 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+        services.AddScoped<IGoWeatherRepository, GoWeatherRepository>();
+
+        services.AddHttpClient<GoWeatherHttpClientService>((provider, options) =>
+        {
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            options.BaseAddress = new Uri(configuration["GoWeatherAPI:BaseUrl"]);
+        });
 
         return services;
     }
