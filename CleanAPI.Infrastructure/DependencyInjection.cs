@@ -1,4 +1,5 @@
-﻿using CleanAPI.Core.Interfaces;
+﻿using CleanAPI.Application.Interfaces;
+using CleanAPI.Core.Interfaces;
 using CleanAPI.Core.Options;
 using CleanAPI.Infrastructure.Data;
 using CleanAPI.Infrastructure.Repositories;
@@ -26,6 +27,7 @@ public static class DependencyInjection
 
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IGoWeatherRepository, GoWeatherRepository>();
+        services.AddScoped<IEmailService, EmailService>();
 
         services.AddHttpClient<GoWeatherHttpClientService>((provider, options) =>
         {
